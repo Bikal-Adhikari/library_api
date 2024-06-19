@@ -34,6 +34,7 @@ export const newUserValidation = (req, res, next) => {
 
 export const updateUserValidation = (req, res, next) => {
   const schema = Joi.object({
+    _id: STR_REQUIRED,
     fName: STR_REQUIRED,
     lName: STR_REQUIRED,
     phone: PHONE,
