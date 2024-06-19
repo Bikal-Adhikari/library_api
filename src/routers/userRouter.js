@@ -1,7 +1,14 @@
 import express from "express";
-import { createNewUser, getUserByEmail } from "../models/user/UserModel.js";
+import {
+  createNewUser,
+  getUserByEmail,
+  updateUser,
+} from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
-import { newUserValidation } from "../middlewares/joiValidation.js";
+import {
+  newUserValidation,
+  updateUserValidation,
+} from "../middlewares/joiValidation.js";
 import { singAccessJWT, singRefresJWT } from "../utils/jwt.js";
 import { auth, jwtAuth } from "../middlewares/auth.js";
 const router = express.Router();
@@ -97,6 +104,26 @@ router.get("/renew-accesjwt", jwtAuth, async (req, res, next) => {
     const { email } = req.userInfo;
     const accessJWT = singAccessJWT({ email });
     res.json({ accessJWT });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/", updateUserValidation, async (req, res, next) => {
+  try {
+    const { _id, ...rest } = req.body;
+    const update = await updateUser(_id, rest);
+
+    update?._id
+      ? res.json({
+          status: "success",
+          message: "Your profile has been updated",
+          data: update,
+        })
+      : res.json({
+          status: "error",
+          message: "Unable to update the profile, try again later",
+        });
   } catch (error) {
     next(error);
   }
