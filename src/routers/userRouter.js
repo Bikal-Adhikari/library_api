@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createNewUser,
+  getAllStudents,
   getUserByEmail,
   updateUser,
 } from "../models/user/UserModel.js";
@@ -10,7 +11,7 @@ import {
   updateUserValidation,
 } from "../middlewares/joiValidation.js";
 import { singAccessJWT, singRefresJWT } from "../utils/jwt.js";
-import { auth, jwtAuth } from "../middlewares/auth.js";
+import { auth, isAdmin, jwtAuth } from "../middlewares/auth.js";
 const router = express.Router();
 
 // router.all("/", (req, res, next) => {
@@ -92,6 +93,18 @@ router.get("/", auth, (req, res, next) => {
       status: "success",
       message: "User profile",
       user: req.userInfo,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+router.get("/students", auth, isAdmin, async (req, res, next) => {
+  try {
+    const students = await getAllStudents();
+    res.json({
+      status: "success",
+      message: "List of all students",
+      students,
     });
   } catch (error) {
     next(error);
