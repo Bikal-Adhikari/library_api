@@ -13,8 +13,11 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://library-client-xi.vercel.app/",
 ];
+
+// Configure CORS
 const corsOptions = {
   origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl requests)
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg =
@@ -25,7 +28,8 @@ const corsOptions = {
   },
   optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-app.use(cors(corsOptions));
+
+app.use(cors(corsOptions)); // Apply CORS middleware globally
 app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
