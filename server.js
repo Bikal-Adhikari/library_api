@@ -9,7 +9,23 @@ import { connectMongoDB } from "./src/config/monogoConfig.js";
 connectMongoDB();
 
 // middlewares
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://library-client-xi.vercel.app/",
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg =
+        "The CORS policy for this site does not allow access from the specified Origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
