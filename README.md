@@ -15,3 +15,13 @@ Welcome to the Library Management System Server API! This API is designed to man
 1. Add Book: Admins can add new books to the library.
 2. Edit Book Details: Admins can edit existing book details.
 3. Borrow Book Management: Admins can manage the borrowing of books.
+
+## Technologies Used
+
+1. Node.js: JavaScript runtime built on Chrome's V8 JavaScript engine.
+2. Express: Fast, unopinionated, minimalist web framework for Node.js.
+3. Bcrypt: Password hashing function for secure password storage.
+4. Joi: Data validation library for JavaScript.
+5. CORS: Middleware for enabling Cross-Origin Resource Sharing.
+6. Morgan: HTTP request logger middleware for Node.js.
+7. MongoDB: NoSQL database for storing application data.
