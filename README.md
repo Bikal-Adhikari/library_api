@@ -25,3 +25,34 @@ Welcome to the Library Management System Server API! This API is designed to man
 5. CORS: Middleware for enabling Cross-Origin Resource Sharing.
 6. Morgan: HTTP request logger middleware for Node.js.
 7. MongoDB: NoSQL database for storing application data.
+
+### Installation
+
+To get started with the project, follow these steps:
+
+## Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/yourusername/library-management-server.git
+cd library-management-server
+
+Install dependencies:
+
+bash
+Copy code
+npm install
+
+Set up environment variables: Create a .env file in the root directory and add the following variables:
+
+plaintext
+Copy code
+PORT=5000
+MONGODB_URL=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+
+Start the server:
+
+bash
+Copy code
+npm start
