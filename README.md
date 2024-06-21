@@ -33,8 +33,8 @@ To get started with the project, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/library-management-server.git
-   cd library-management-server
+   git clone https://github.com/Bikal-Adhikari/library_api.git
+   cd library-api
    ```
 
 2. **Install dependencies**:
