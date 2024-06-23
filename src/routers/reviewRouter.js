@@ -3,6 +3,7 @@ import express from "express";
 import { auth, isAdmin } from "../middlewares/auth.js";
 import { newReviewValidation } from "../middlewares/joiValidation.js";
 import {
+  deleteAReviewById,
   getAllReviews,
   insertReview,
   updateAReviewById,
@@ -73,6 +74,21 @@ router.get("/", async (req, res, next) => {
       message: "",
       reviews,
     });
+  } catch (error) {
+    next(error);
+  }
+});
+router.delete("/:_id?", async (req, res, next) => {
+  try {
+    const { _id } = req.params;
+    const result = await deleteAReviewById(_id);
+
+    if (result) {
+      return res.json({
+        status: "success",
+        message: "The review has been deleted successfully",
+      });
+    }
   } catch (error) {
     next(error);
   }
