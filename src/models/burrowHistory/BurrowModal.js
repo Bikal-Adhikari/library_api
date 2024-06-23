@@ -14,6 +14,9 @@ export const getAllBurrows = (filter) => {
 export const getABurrowById = (_id) => {
   return BurrowSchema.findById(_id);
 };
+export const getAllUserBurrow = (userId) => {
+  return BurrowSchema.find(userId);
+};
 
 // update burrow by id
 export const updateABurrowById = (_id, obj) => {

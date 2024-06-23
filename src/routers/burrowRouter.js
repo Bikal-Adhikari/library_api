@@ -14,6 +14,7 @@ import {
 } from "../models/books/BookModal.js";
 import {
   getAllBurrows,
+  getAllUserBurrow,
   insertBurrow,
   updateABurrowById,
 } from "../models/burrowHistory/BurrowModal.js";
@@ -74,6 +75,17 @@ router.get("/", async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+});
+
+router.get("/:userId?", async (req, res) => {
+  try {
+    const burrows = await getAllUserBurrow({ userId: req.params.userId });
+    res.json({ status: "success", burrows });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ status: "error", message: "Error fetching user borrowing data" });
   }
 });
 
