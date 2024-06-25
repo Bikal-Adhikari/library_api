@@ -22,7 +22,7 @@ const corsOptions = {
 app.options("*", cors(corsOptions));
 
 // Apply CORS middleware globally with options
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
