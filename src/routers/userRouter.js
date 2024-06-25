@@ -116,7 +116,7 @@ router.get("/renew-accesjwt", jwtAuth, async (req, res, next) => {
   try {
     const { email } = req.userInfo;
     const accessJWT = singAccessJWT({ email });
-    res.json({ accessJWT });
+    res.json({ status: "success", accessJWT });
   } catch (error) {
     next(error);
   }
