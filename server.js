@@ -4,7 +4,7 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-//connect mongodb
+// Connect to MongoDB
 import { connectMongoDB } from "./src/config/monogoConfig.js";
 connectMongoDB();
 
@@ -26,11 +26,10 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
-  // you can leave this for the prod as well to track the user requestes
   app.use(morgan("dev"));
 }
 
-//rotuers
+// Routers
 import userRouter from "./src/routers/userRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
 import burroRouter from "./src/routers/burrowRouter.js";
@@ -41,20 +40,21 @@ app.use("/api/v1/books", bookRouter);
 app.use("/api/v1/burrows", auth, burroRouter);
 app.use("/api/v1/reviews", reviewRouter);
 
-//server status
+// Server status
 app.get("/", (req, res, next) => {
   res.json({ message: "server is healthy" });
 });
 
+// 404 Not Found handler
 app.use("*", (req, res, next) => {
   const err = new Error("404 Not Found");
   err.status = 404;
   next(err);
 });
 
-//global error handler
+// Global error handler
 app.use((error, req, res, next) => {
-  console.log(error.message, "=======");
+  console.error(error.message, "=======");
 
   res.status(error.status || 500);
   res.json({
@@ -63,8 +63,11 @@ app.use((error, req, res, next) => {
   });
 });
 
+// Start the server
 app.listen(PORT, (error) => {
-  error
-    ? console.log(error)
-    : console.log(`Server is running at http://localhost:${PORT}`);
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(`Server is running at http://localhost:${PORT}`);
+  }
 });
