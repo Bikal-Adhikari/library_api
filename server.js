@@ -9,15 +9,20 @@ import { connectMongoDB } from "./src/config/monogoConfig.js";
 connectMongoDB();
 
 const corsOptions = {
-  origin: ["https://library-client-xi.vercel.app/"],
+  origin: [
+    "https://library-client-xi.vercel.app", // Production frontend URL
+    "http://localhost:5173", // Local development frontend URL
+  ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 204,
 };
 
+// Apply CORS options to all preflight requests
 app.options("*", cors(corsOptions));
 
-app.use(cors()); // Apply CORS middleware globally
+// Apply CORS middleware globally with options
+app.use(cors(corsOptions));
 app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
