@@ -13,11 +13,11 @@ const corsOptions = {
 
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: [
+    "Origin",
     "Content-Type",
     "Authorization",
     "X-Requested-With",
     "Accept",
-    "Authorization",
   ],
   optionsSuccessStatus: 204,
 };
