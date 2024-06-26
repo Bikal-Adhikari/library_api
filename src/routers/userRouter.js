@@ -112,7 +112,7 @@ router.get("/students", auth, isAdmin, async (req, res, next) => {
 });
 
 // return new accessJWT
-router.get("/renew-accesjwt", jwtAuth, async (req, res, next) => {
+router.get("/renew-accessjwt", jwtAuth, async (req, res, next) => {
   try {
     const { email } = req.userInfo;
     const accessJWT = singAccessJWT({ email });
