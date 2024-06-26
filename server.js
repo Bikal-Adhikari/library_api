@@ -10,14 +10,15 @@ connectMongoDB();
 
 const corsOptions = {
   origin: ["*"],
+
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: [
     "Content-Type",
     "Authorization",
     "X-Requested-With",
     "Accept",
+    "Authorization",
   ],
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-
   optionsSuccessStatus: 204,
 };
 
