@@ -8,25 +8,25 @@ const PORT = process.env.PORT || 8000;
 import { connectMongoDB } from "./src/config/monogoConfig.js";
 connectMongoDB();
 
-const corsOptions = {
-  origin: ["*"],
+// const corsOptions = {
+//   origin: ["*"],
 
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Origin",
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Accept",
-  ],
-  optionsSuccessStatus: 204,
-};
+//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//   allowedHeaders: [
+//     "Origin",
+//     "Content-Type",
+//     "Authorization",
+//     "X-Requested-With",
+//     "Accept",
+//   ],
+//   optionsSuccessStatus: 204,
+// };
 
 // Apply CORS options to all preflight requests
-app.options("*", cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 // Apply CORS middleware globally with options
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 if (process.env.NODE_ENV !== "production") {
