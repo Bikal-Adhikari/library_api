@@ -4,6 +4,7 @@ import {
   getAllStudents,
   getUserByEmail,
   updateUser,
+  updateUserbyId,
 } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import {
@@ -67,8 +68,8 @@ router.post("/login", async (req, res, next) => {
           status: "success",
           message: "user authenticated",
           tokens: {
-            accessJWT: singAccessJWT({ email }),
-            refreshJWT: singRefresJWT({ email }),
+            accessJWT: await singAccessJWT({ email }),
+            refreshJWT: await singRefresJWT({ email }),
           },
         });
       }
@@ -89,6 +90,7 @@ router.get("/", auth, (req, res, next) => {
   try {
     req.userInfo.refreshJWT = undefined;
     req.userInfo.__v = undefined;
+    console.log(req.userInfo);
     res.json({
       status: "success",
       message: "User profile",
@@ -125,7 +127,7 @@ router.get("/renew-accessjwt", jwtAuth, async (req, res, next) => {
 router.put("/", updateUserValidation, async (req, res, next) => {
   try {
     const { _id, ...rest } = req.body;
-    const update = await updateUser(_id, rest);
+    const update = await updateUserbyId(_id, rest);
 
     update?._id
       ? res.json({

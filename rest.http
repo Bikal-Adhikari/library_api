@@ -12,21 +12,18 @@ GET {{rootURL}}
 ###===== user api
 ### Get user  
 GET {{userAPI}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE3MTYyNTcxOTQsImV4cCI6MTcxNjI1ODA5NH0.G8DLTNrAkjC9RO5FrgEMREud-c-GH3ouzk3JcL4BWFQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE3MTk4NzU4MDgsImV4cCI6MTcxOTg3NjcwOH0.lGhCFzpTjmhhkkglUHdfsZimWU6M-CJHCl_2Ulp7D98
 
-### Post user 
-POST {{userAPI}}
+### login user 
+POST {{userAPI}}/login
 Content-Type: application/json
 
 {
-    "fName": "prem",
-    "lName": "presfdsm",
-    "phone": 34567,
-    "email": "{asdf@sdfc.com",
-    "password": "sdfdsf"
-  
+    "email": "a@a.com",
+    "password": "as"
 }
   
+
 # ======== Book
 ### Get all books for the admin 
 GET {{bookAPI}}/all

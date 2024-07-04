@@ -3,11 +3,11 @@ import { insertToken } from "../models/session/SessionSchema.js";
 import { updateUser } from "../models/user/UserModel.js";
 
 // create acess jwt
-export const singAccessJWT = (payload) => {
+export const singAccessJWT = async (payload) => {
   const token = JWT.sign(payload, process.env.ACCESS_JWT_SECRET, {
     expiresIn: "15m",
   });
-  insertToken({ token });
+  await insertToken({ token });
   return token;
 };
 
@@ -21,11 +21,11 @@ export const verifyAccessJWT = (token) => {
 };
 
 // create refresh jwt
-export const singRefresJWT = ({ email }) => {
+export const singRefresJWT = async ({ email }) => {
   const refreshJWT = JWT.sign({ email }, process.env.REFRESH_JWT_SECRET, {
     expiresIn: "30d",
   });
-  updateUser({ email }, { refreshJWT });
+  await updateUser({ email }, { refreshJWT });
   return refreshJWT;
 };
 // verify refresh jwt
